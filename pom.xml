@@ -5,7 +5,7 @@
 
     <groupId>org.odfi.ubroker</groupId>
     <artifactId>ubroker-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <parent>
         <groupId>org.odfi</groupId>
