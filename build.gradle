@@ -1,0 +1,143 @@
+
+plugins {
+    // Scala
+    // Apply the java plugin to add support for Java
+    id 'scala'
+    id "org.odfi.ooxoo" version "3.4.3-SNAPSHOT"
+
+    // Publish
+    id 'maven-publish'
+    id "java-library"
+
+}
+
+
+group = 'org.odfi.ubroker'
+version = gradle.ext.has("version") ?  gradle.ext.version :  "dev"
+
+//gradle.ext.version
+
+// Sources
+//-------------------
+sourceSets {
+    main {
+        scala {
+            // Generated from ooxoo
+            srcDir new java.io.File(getBuildDir(), "generated-sources/scala")
+        }
+    }
+
+}
+
+// Dependencies
+//-------------------
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
+def ooxoo_version = "3.4.3-SNAPSHOT"
+
+def scala_major = "2.13"
+def scala_version = gradle.ext.has("scala_version") ? gradle.ext.scala_version :  "$scala_major.5"
+dependencies {
+
+
+    api "org.odfi.ooxoo:ooxoo-core:${ooxoo_version}"
+ 
+    api("org.scala-lang:scala-library:$scala_version")
+    api "org.scala-lang.modules:scala-xml_$scala_major:2.0.0-M5"
+    testImplementation "org.scala-lang.modules:scala-xml_$scala_major:2.0.0-M3"
+    testImplementation "org.scalatest:scalatest-funsuite_$scala_major:3.2.6"
+    testImplementation "org.scalatest:scalatest-shouldmatchers_$scala_major:3.2.6"
+}
+
+
+publishing {
+
+    publications {
+
+        publishToMavenLocal(MavenPublication) {
+
+            artifactId "ubroker-core"
+            from components.java
+
+            pom {
+                name = 'UBroker Core'
+                description = 'UBroker base Message passing tree library'
+
+                //properties = [ ]
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'richnou'
+                        name = 'Richnou'
+                        email = 'leys.richard@gmail.com'
+                    }
+                }
+
+            }
+        }
+
+    }
+    repositories {
+        maven {
+
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = "https://www.opendesignflow.org/maven/repository/internal/"
+            def snapshotsRepoUrl = "https://www.opendesignflow.org/maven/repository/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+            // Credentials
+            //-------------
+            def mavenOdfiPropertiesFile = new File(System.getProperty("user.home") + File.separator + ".gradle/odfi-maven.properties").getCanonicalFile()
+
+            if (mavenOdfiPropertiesFile.exists()) {
+                def keystoreProperties = new Properties()
+                keystoreProperties.load(new FileInputStream(mavenOdfiPropertiesFile))
+
+                credentials {
+                    username keystoreProperties["user"]
+                    password keystoreProperties["password"]
+                }
+            } else {
+                credentials {
+                    username System.getenv("PUBLISH_USERNAME")
+                    password System.getenv("PUBLISH_PASSWORD")
+                }
+            }
+        }
+    }
+}
+
+repositories {
+
+    mavenLocal()
+    mavenCentral()
+    maven {
+        name = 'Sonatype Nexus Snapshots'
+        url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+    maven {
+        name = 'ODFI Releases'
+        url = 'https://www.opendesignflow.org/maven/repository/internal/'
+    }
+    maven {
+        name = 'ODFI Snapshots'
+        url = 'https://www.opendesignflow.org/maven/repository/snapshots/'
+    }
+    maven {
+        url "https://repo.triplequote.com/libs-release/"
+    }
+    google()
+    jcenter()
+}
+
+
+
