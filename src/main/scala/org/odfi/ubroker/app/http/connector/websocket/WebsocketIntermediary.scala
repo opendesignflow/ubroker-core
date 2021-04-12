@@ -134,7 +134,7 @@ trait WebsocketIntermediary extends HTTPIntermediary {
   }
 
   // Events
-  def onWebsocketConnected(cl: => Any) {
+  def onWebsocketConnected(cl: => Any) = {
     this.on("websocket.connected") {
       cl
     }

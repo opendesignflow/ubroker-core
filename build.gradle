@@ -3,7 +3,7 @@ plugins {
     // Scala
     // Apply the java plugin to add support for Java
     id 'scala'
-    id "org.odfi.ooxoo" version "3.4.3-SNAPSHOT"
+    id "org.odfi.ooxoo" version "3.4.4"
 
     // Publish
     id 'maven-publish'
@@ -29,25 +29,39 @@ sourceSets {
 
 }
 
-// Dependencies
-//-------------------
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(11))
     }
+    withJavadocJar()
+    withSourcesJar()
 }
 
-def ooxoo_version = "3.4.3-SNAPSHOT"
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
 
+// Dependencies
+//-------------------
+def ooxoo_version = gradle.ext.ooxoo_version
 def scala_major = "2.13"
 def scala_version = gradle.ext.has("scala_version") ? gradle.ext.scala_version :  "$scala_major.5"
 dependencies {
 
-
+    // Deps
+    //--------------
     api "org.odfi.ooxoo:ooxoo-core:${ooxoo_version}"
- 
+
+    // Scala
+    //--------------------
     api("org.scala-lang:scala-library:$scala_version")
     api "org.scala-lang.modules:scala-xml_$scala_major:2.0.0-M5"
+
+    // Test
+    //--------------
     testImplementation "org.scala-lang.modules:scala-xml_$scala_major:2.0.0-M3"
     testImplementation "org.scalatest:scalatest-funsuite_$scala_major:3.2.6"
     testImplementation "org.scalatest:scalatest-shouldmatchers_$scala_major:3.2.6"

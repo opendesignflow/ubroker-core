@@ -38,7 +38,7 @@ class SimpleRPCMessagesHandler extends MessageIntermediary[SimpleRPCMessage] {
 
   // Message Type
   //--------------------
-  val ttag = classTag[SimpleRPCMessage]
+  def messageType = classOf[SimpleRPCMessage]
 
   /**
    * Maps qualifier strings to actual handling closures

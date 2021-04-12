@@ -26,7 +26,8 @@ import scala.reflect._
 
 trait HTTPIntermediary extends MessageIntermediary[HTTPRequest] {
 
-  val ttag = classTag[HTTPRequest]
+
+  def messageType = classOf[HTTPRequest]
   
   // Operations CLosures
   //----------------------
@@ -73,6 +74,6 @@ trait HTTPIntermediary extends MessageIntermediary[HTTPRequest] {
 
 class HTTPResponseIntermediary extends MessageIntermediary[HTTPResponse] {
 
- val ttag = classTag[HTTPResponse]
+  def messageType = classOf[HTTPResponse]
 
 }

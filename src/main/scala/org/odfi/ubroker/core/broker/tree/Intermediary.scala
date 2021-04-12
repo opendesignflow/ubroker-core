@@ -43,16 +43,13 @@ trait Intermediary extends ElementBuffer with TLogSource with ListeningSupport {
   /**
    * A Name for user/api to formally identify the intermediary
    */
-  @xattribute
   var name: String = ""
 
   /**
    * Filter is used by Broker to determine if a message should go through this intermediary.
    */
-  @xattribute
   var filter: Regex = """.*""".r
 
-  @xelement
   var intermediaries: XList[Intermediary] = XList[Intermediary] { new Intermediary {} }
 
   /**
@@ -513,12 +510,12 @@ trait Intermediary extends ElementBuffer with TLogSource with ListeningSupport {
    */
   def findChild(cl: Intermediary => Boolean): Option[Intermediary] = {
 
-    var childrenToProcess = scala.collection.mutable.ArrayStack[Intermediary]()
+    var childrenToProcess = scala.collection.mutable.Stack[Intermediary]()
     childrenToProcess ++= this.intermediaries
     var res: Option[Intermediary] = None
     while (res.isEmpty && childrenToProcess.isEmpty == false) {
 
-      var current = childrenToProcess.pop
+      var current = childrenToProcess.pop()
       cl(current) match {
         case true => res = Some(current)
         case false => childrenToProcess ++= current.intermediaries

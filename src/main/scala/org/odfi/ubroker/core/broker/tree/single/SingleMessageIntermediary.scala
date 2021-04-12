@@ -29,6 +29,8 @@ class SingleMessageIntermediary[MT <: SingleMessage](implicit val ttag: ClassTag
 
   //println(s"Creating Single Message intermediary from: " + messageType)
 
+  def messageType = ttag.runtimeClass.asInstanceOf[Class[MT]]
+
   /**
    * Busy Locks are store in a map pro virtual Channel
    */

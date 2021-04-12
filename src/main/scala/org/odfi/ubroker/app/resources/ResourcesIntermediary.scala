@@ -517,7 +517,7 @@ object ResourcesIntermediary {
 
       cacheMap.get(url.toExternalForm()) match {
 
-        case v if (doForce || v.isEmpty || v.get.get == null) =>
+        case v if (doForce || v.isEmpty || v.get.get == null ) =>
 
           // Map file
           //------------

@@ -37,7 +37,7 @@ trait SOAPIntermediary extends MessageIntermediary[SOAPMessage] {
  
   // Message Type
   //--------------------
-  val ttag = classTag[SOAPMessage]
+  def messageType = classOf[SOAPMessage]
   
   //def messageType = classOf[SOAPMessage]
   

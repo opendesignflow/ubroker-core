@@ -34,7 +34,7 @@ import scala.reflect._
  */
 trait MessageIntermediary[MT <: Message] extends Intermediary {
 
-  val ttag: ClassTag[MT]
+  //val ttag: ClassTag[MT]
 
   // Message closure
   var messageDownClosures = List[MT => Unit]()
@@ -46,7 +46,7 @@ trait MessageIntermediary[MT <: Message] extends Intermediary {
   // User Interface
   //-----------------
 
-  def messageType: Class[MT] = ttag.runtimeClass.asInstanceOf[Class[MT]]
+  def messageType: Class[MT]
 
   def onDownMessage(cl: MT => Unit) = this.messageDownClosures = messageDownClosures :+ cl
   def onUpMessage[T <: Message](cl: T => Unit) = this.messageUpClosures = messageUpClosures :+ cl.asInstanceOf[Message => Unit]
