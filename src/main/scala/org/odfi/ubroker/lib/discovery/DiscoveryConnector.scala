@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
  */
-package com.idyria.osi.wsb.lib.discovery
+package org.odfi.ubroker.lib.discovery
 
 import java.net.InetAddress
-import scala.jdk.CollectionConverters._
 import org.odfi.ubroker.core.network.NetworkContext
+
 import java.net.DatagramSocket
 import java.net.DatagramPacket
 import com.idyria.osi.ooxoo.core.buffers.structural.xelement
@@ -32,20 +32,21 @@ import com.idyria.osi.ooxoo.core.buffers.structural.AnyXList
 import org.odfi.ubroker.core.message.soap.SOAPMessage
 import com.idyria.osi.ooxoo.core.buffers.structural.xattribute
 import org.odfi.ubroker.core.message.Message
+
 import java.nio.ByteBuffer
 import com.idyria.osi.ooxoo.core.buffers.datatypes.IntegerBuffer
 import com.idyria.osi.ooxoo.core.buffers.datatypes.XSDStringBuffer.convertStringToXSDStringBuffer
-import com.idyria.osi.wsb.lib.soap.Action
 import com.idyria.osi.ooxoo.core.buffers.datatypes.LongBuffer
 import org.odfi.ubroker.core.network.connectors.AbstractConnector
 import com.idyria.osi.ooxoo.core.buffers.structural.XList
-import org.odfi.tea.logging.TLog
 import org.odfi.tea.logging.TLogSource
 import org.odfi.tea.listeners.ListeningSupport
+
 import java.util.Timer
 import java.util.TimerTask
 import org.odfi.ubroker.core.network.connectors.tcp.TCPConnector
 import org.odfi.tea.thread.ThreadLanguage
+import org.odfi.ubroker.lib.soap.Action
 
 /**
  * This class only sends a UDP Broadcast discovery SOAP Message when in server mode, and in client waits for this message
@@ -216,7 +217,7 @@ class DiscoveryConnector(var serviceName: String, var port: Int = 8891) extends 
         while (!this.stopThread) {
 
           //-- Set Message payload
-          message.body.content.clear
+          message.body.content.clear()
           var discovery = new Discovery
           discovery.interval = this.sendIntervalMs.toLong
           discovery.timestamp = System.currentTimeMillis()

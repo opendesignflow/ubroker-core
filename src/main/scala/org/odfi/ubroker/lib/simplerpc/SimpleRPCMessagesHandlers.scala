@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
  */
-package com.idyria.osi.wsb.lib.simplerpc
+package org.odfi.ubroker.lib.simplerpc
 
 import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
 import com.idyria.osi.ooxoo.core.buffers.structural.AnyXList

@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
  */
-package com.idyria.osi.wsb.lib.soap
+package org.odfi.ubroker.lib.soap
 
 
 import org.odfi.ubroker.core.message.soap.SOAPMessage

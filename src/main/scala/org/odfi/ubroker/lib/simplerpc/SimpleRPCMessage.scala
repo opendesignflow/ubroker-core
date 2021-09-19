@@ -1,4 +1,4 @@
-package com.idyria.osi.wsb.lib.simplerpc
+package org.odfi.ubroker.lib.simplerpc
 
 import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
 import com.idyria.osi.ooxoo.core.buffers.structural.io.sax.STAXSyncTrait

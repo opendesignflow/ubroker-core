@@ -34,7 +34,7 @@ trait MimePart extends TLogSource {
 
   var protocolLines = List[String]()
 
-  var parameters = LinkedHashSet[(String, String)]()
+  var parameters = Set[(String, String)]()
 
   val parameterLineRegexp = """([\w-]+): (.+)""".r
 

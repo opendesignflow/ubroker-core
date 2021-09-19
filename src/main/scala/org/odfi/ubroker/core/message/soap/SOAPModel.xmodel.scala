@@ -28,81 +28,87 @@ import com.idyria.osi.ooxoo.core.buffers.datatypes.CDataBuffer
 import com.idyria.osi.ooxoo.model.Element
 
 @producers(Array(
-    new producer(value=classOf[ScalaProducer])
+  new producer(value = classOf[ScalaProducer])
 ))
-object SOAP extends ModelBuilder {
+class SOAP extends ModelBuilder {
 
-    name="SOAPModel"
-    
-    namespace("env" -> "http://www.w3.org/2003/05/soap-envelope")
-    parameter("scalaProducer.targetPackage" -> "org.odfi.ubroker.core.message.soap")
+  name = "SOAPModel"
 
-   
-    "env:Envelope" is {
+  namespace("env" -> "http://www.w3.org/2003/05/soap-envelope")
+  parameter("scalaProducer.targetPackage" -> "org.odfi.ubroker.core.message.soap")
 
 
-        "env:Header" is {
+  "env:Envelope" is {
 
-           any
 
-        }
+    "env:Header" is {
 
-        "env:Body" is {
+      any
 
-            any
-
-        }
-  
-    }  
-        
-    "env:Fault" is {
-        
-        "env:Code" is {
-            
-            "env:Value" enum("VersionMismatch","MustUnderstand","DataEncodingUnknown","Sender","Receiver")
-            
-            var subCode = "env:Subcode" is { }
-            subCode is {
-            
-                "env:Value" ofType "string"
-                
-                importElement(subCode)
-                //"env:Subcode" is {
-                //}
-            }
-            /*var subCode : Element = "env:Subcode" is {
-            
-                "env:Value" ofType "string"
-                
-                importElement(subCode)
-                //"env:Subcode" is {
-                //}
-            }*/
-        } 
-        
-        "env:Reason" is {
-            //"env:Text" ofType "string"
-          "env:Text" is {
-            ofType("cdata")
-            
-          }
-          
-          "env:Reason" is {}
-        }
-        
-        // Optional
-        //------------
-        "env:Node" ofType "uri"
-        "env:Role" ofType "uri"
-        
-        "env:Detail" is {
-            
-            any  
-        
-        } 
-        
-    
-        
     }
+
+    "env:Body" is {
+
+      any
+
+    }
+
+  }
+
+  "env:Fault" is {
+
+    "env:Code" is {
+
+      "env:Subcode" is {
+        "env:Value" ofType "string"
+      }
+
+      "env:Value" valueEnum("VersionMismatch", "MustUnderstand", "DataEncodingUnknown", "Sender", "Receiver")
+
+      /*var subCode = "env:Subcode" is {
+
+      }
+      subCode is {
+
+          "env:Value" ofType "string"
+
+          importElement(subCode)
+          //"env:Subcode" is {
+          //}
+      }
+      subCode*/
+      /*var subCode : Element = "env:Subcode" is {
+
+          "env:Value" ofType "string"
+
+          importElement(subCode)
+          //"env:Subcode" is {
+          //}
+      }*/
+    }
+
+    "env:Reason" is {
+      //"env:Text" ofType "string"
+      "env:Text" is {
+        ofType("cdata")
+
+      }
+
+      "env:Reason" is {}
+    }
+
+    // Optional
+    //------------
+    "env:Node" ofType "uri"
+    "env:Role" ofType "uri"
+
+    "env:Detail" is {
+
+      any
+
+    }
+
+
+  }
 
 }

@@ -18,9 +18,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
  */
-package com.idyria.osi.wsb.lib.soap
+package org.odfi.ubroker.lib.soap
 
-import com.idyria.osi.wsb.lib.client.WSBClientEngine
+
 import org.odfi.ubroker.core.broker.tree.Intermediary
 import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
 import org.odfi.ubroker.core.message.soap.SOAPMessage
@@ -28,14 +28,14 @@ import org.odfi.ubroker.core.message.UpMessage
 import org.odfi.ubroker.core.message.Message
 import org.odfi.ubroker.core.network.NetworkContext
 import org.odfi.ubroker.core.message.soap.SOAPIntermediary
-import com.idyria.osi.wsb.lib.client.WSBClientEngine
 import org.odfi.ubroker.core.message.soap.SOAPMessagesHandler
 import org.odfi.ubroker.core.broker.tree.Intermediary
 import org.odfi.ubroker.core.message.soap.SOAPMessage
-import com.idyria.osi.wsb.lib.client.WSBClientEngine
 import org.odfi.ubroker.core.message.soap.Fault
 import org.odfi.ubroker.core.WSBEngine
 import org.odfi.ubroker.core.network.connectors.AbstractConnector
+import org.odfi.ubroker.lib.client.WSBClientEngine
+
 import scala.reflect.ClassTag
 
 /**
@@ -91,8 +91,7 @@ class WSAClientEngine(e: WSBEngine = new WSBEngine) extends WSBClientEngine(e) {
   //-------------------
 
   var currentNetworkID : Option[String] = None
-  
-  import scala.reflect.runtime.universe._
+
   import scala.reflect._
   /**
    * Send to default selected NetworkID

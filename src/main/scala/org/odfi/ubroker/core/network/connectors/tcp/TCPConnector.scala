@@ -611,7 +611,7 @@ abstract class TCPConnector extends AbstractConnector[TCPNetworkContext] with Li
                           networkContext.triggerInputPayloadSemaphore
 
                         // Protocol not ready
-                        case None =>
+                        case other =>
 
                       }
 
@@ -877,7 +877,7 @@ abstract class TCPProtocolHandlerConnector[T](var protocolHandlerFactory: (TCPNe
           }
 
           @->("protocol.receive.endOfData")
-          handler.availableDatas.clear
+          handler.availableDatas.clear()
 
           Option(res)
 
@@ -940,7 +940,7 @@ abstract class SSLTCPProtocolHandlerConnector[T](var protocolHandlerFactory: (TC
         }
 
         @->("protocol.receive.endOfData")
-        handler.availableDatas.clear
+        handler.availableDatas.clear()
 
         Option(res)
 

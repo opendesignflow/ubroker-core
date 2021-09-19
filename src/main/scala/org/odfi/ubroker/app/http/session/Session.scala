@@ -103,8 +103,8 @@ class Session(var id: String, var host: String) extends TLogSource {
       case (k,v:T) => true
       case other => false
     } match {
-      case None => None
       case Some((k,v:T)) => Some(k,v)
+      case other => None
     }
   }
 

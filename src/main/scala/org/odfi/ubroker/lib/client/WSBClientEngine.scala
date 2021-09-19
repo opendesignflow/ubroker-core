@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
  */
-package com.idyria.osi.wsb.lib.client
+package org.odfi.ubroker.lib.client
 
 import org.odfi.ubroker.core.WSBEngine
 
