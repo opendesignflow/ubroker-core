@@ -76,7 +76,7 @@ trait Intermediary extends ElementBuffer with TLogSource with ListeningSupport {
    */
   def acceptDown[MT <: Message](cl: MT => Boolean)(implicit tag: ClassTag[MT]) = {
     val realCl = {
-      m: Message =>
+      (m: Message) =>
         m match {
           case m if (tag.runtimeClass.isInstance(m)) =>
             cl(m.asInstanceOf[MT])
@@ -359,7 +359,7 @@ trait Intermediary extends ElementBuffer with TLogSource with ListeningSupport {
 
   def onIntermediaryAdded[T <: Intermediary: ClassTag](cl: T => Any) = {
     this.onWith[T]("intermediary.add") {
-      t: T =>
+      (t: T) =>
         cl(t)
     }
   }

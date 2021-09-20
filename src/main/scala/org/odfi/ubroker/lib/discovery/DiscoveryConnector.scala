@@ -178,7 +178,7 @@ class DiscoveryConnector(var serviceName: String, var port: Int = 8891) extends 
               case _ =>
 
                 // No Service Header found -> fail
-                logWarn(s"Could not receive properly Discovery message as it does not contain any Service header: " + soapMessage.toXMLString)
+                logWarn[DiscoveryConnector](s"Could not receive properly Discovery message as it does not contain any Service header: " + soapMessage.toXMLString)
             }
             // EOF Receive message
 
@@ -280,14 +280,14 @@ class DiscoveryConnector(var serviceName: String, var port: Int = 8891) extends 
    */
   def checkServices  : Unit = {
 
-    logFine(s"Checking services")
+    logFine[DiscoveryConnector](s"Checking services")
     this.discoveredMap.filter {
       case (identifier, (service, nextUpdate)) =>
         nextUpdate < System.currentTimeMillis()
     }.foreach {
       case (identifier, (service, nextUpdate)) =>
 
-        logFine(s"Service ${service.name} next update was at $nextUpdate, but now is ${System.currentTimeMillis()}")
+        logFine[DiscoveryConnector](s"Service ${service.name} next update was at $nextUpdate, but now is ${System.currentTimeMillis()}")
         @->("service.expired", service)
         this.discoveredMap = this.discoveredMap - identifier
     }

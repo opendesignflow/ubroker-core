@@ -55,7 +55,7 @@ class WebsocketProtocolhandler(var localContext: NetworkContext) extends Protoco
     logFine[WebsocketProtocolhandler](s"Received some Websocket datas, with ordering: ${buffer.order().toString()} (native: ${java.nio.ByteOrder.nativeOrder()}), capacity: " + buffer.remaining())
 
     //buffer.order(java.nio.ByteOrder.LITTLE_ENDIAN)
-    do {
+    while ({ {
       remainingDatas match {
 
         // Message Mode
@@ -280,7 +280,7 @@ class WebsocketProtocolhandler(var localContext: NetworkContext) extends Protoco
 
       //res
 
-    } while (!stop)
+    } ; !stop}) ()
 
     true
 
@@ -301,8 +301,8 @@ class WebsocketProtocolhandler(var localContext: NetworkContext) extends Protoco
     head.field("OPCODE").value = 0x1
 
     //-- Length
-    var extendedPayloadLength = 0
-    var lengthExtraBytes = buffer.remaining() match {
+    var extendedPayloadLength = 0L
+    var lengthExtraBytes = buffer.remaining().toLong match {
 
       // Length on 7 bits
       case payloadLength if (payloadLength < 127) =>

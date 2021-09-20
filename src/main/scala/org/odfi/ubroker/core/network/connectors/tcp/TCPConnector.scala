@@ -282,7 +282,7 @@ abstract class TCPConnector extends AbstractConnector[TCPNetworkContext] with Li
    */
   override def lInit = {
 
-    logInfo("Creating Socket")
+    logInfo[TCPConnector]("Creating Socket")
     // Stop all threads
     this.stopThread = false
     // Create Server Socket
@@ -699,7 +699,7 @@ abstract class TCPConnector extends AbstractConnector[TCPNetworkContext] with Li
             }
             // EOF Key matched
 
-            logFine("-- EOF Keys Looop")
+            logFine[TCPConnector]("-- EOF Keys Looop")
           } // EOF While has keys
 
         } catch {

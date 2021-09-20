@@ -304,7 +304,7 @@ abstract class SSLTCPConnector extends AbstractConnector[TCPNetworkContext] with
    */
   override def lInit = {
 
-    logInfo("Creating Socket")
+    logInfo[SSLTCPConnector]("Creating Socket")
 
     // Create Server Socket
     //----------------------------

@@ -206,17 +206,17 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
 
       // Part is already stacked, don't do anything
       case (true, size) =>
-        logFine("Part is already stacked, don't do anything")
+        logFine[HTTPConnector]("Part is already stacked, don't do anything")
       // Add part
       case (false, 0) =>
 
-        logFine("Storing mime part")
+        logFine[HTTPConnector]("Storing mime part")
         this.availableDatas += part
 
       // Merge part
       case (false, size) =>
 
-        logFine("Merging with head")
+        logFine[HTTPConnector]("Merging with head")
         this.availableDatas.head.append(part)
     }
 
@@ -231,7 +231,7 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
     var bytes = new Array[Byte](buffer.remaining)
     buffer.get(bytes)
 
-    logFine("Got HTTP Datas: " + new String(bytes))
+    logFine[HTTPConnector]("Got HTTP Datas: " + new String(bytes))
 
     // Use SOurce to read from buffer
     //--------------------
@@ -239,7 +239,7 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
     //var bytesSource = Source.fromInputStream(new ByteArrayInputStream(buffer.array))
     var stop = false
 
-    do {
+    while ({ {
 
       // If no bytes to read, put on hold
       if (bytes.size == 0)
@@ -278,7 +278,7 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
                 case Some(matched) =>
 
                   contentLength = matched.group(1).toInt
-                  logFine("Content Type specified to bytes")
+                  logFine[HTTPConnector]("Content Type specified to bytes")
                   nextReadMode = "bytes"
                   true
 
@@ -310,13 +310,13 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
                 // Chunked
                 case Some(matched) if (matched.group(1).matches("chunked")) =>
 
-                  logFine("Content is chunked")
+                  logFine[HTTPConnector]("Content is chunked")
                   nextReadMode = "chunked"
                   true
 
                 // Unsupported
                 case Some(matched) =>
-                  logFine("Unsupported Transfer-Encoding: " + matched.group(1))
+                  logFine[HTTPConnector]("Unsupported Transfer-Encoding: " + matched.group(1))
                   true
 
                 case None =>
@@ -339,7 +339,7 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
               //-- Empty Line but content is upcomming
               case line if (line == "" && contentLength != 0 && nextReadMode == "line") =>
 
-                logFine(s"Empty Line but some content is expected")
+                logFine[HTTPConnector](s"Empty Line but some content is expected")
 
                 //--> Write this message part to output
                 this.availableDatas += this.currentPart
@@ -348,13 +348,13 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
               //-- Empty line, content is upcoming and next Read mode is not line
               case line if (line == "" && nextReadMode != "line") =>
 
-                logFine(s"Empty Line but some content is expected in read mode: $nextReadMode, for a length of: $contentLength")
+                logFine[HTTPConnector](s"Empty Line but some content is expected in read mode: $nextReadMode, for a length of: $contentLength")
                 readMode = nextReadMode
 
               //-- Empty Line and no content
               case line if (line == "" && contentLength == 0 && this.currentPart.contentLength > 0) =>
 
-                logFine(s"Empty Line and no content expected, end of section")
+                logFine[HTTPConnector](s"Empty Line and no content expected, end of section")
 
                 //--> Write this message part to output
                 this.availableDatas += this.currentPart
@@ -374,7 +374,7 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
 
             // Report read progress 
             var progress = this.currentPart.bytes.size * 100.0 / contentLength
-            logFine(s"Read state: $progress %, $contentLength expected, and read bytes ${this.currentPart.bytes.size} and content length: ${this.currentPart.contentLength} ")
+            logFine[HTTPConnector](s"Read state: $progress %, $contentLength expected, and read bytes ${this.currentPart.bytes.size} and content length: ${this.currentPart.contentLength} ")
             if ((contentLength - this.currentPart.contentLength) < 10) {
               //if ( progress == 100 ) {
 
@@ -386,13 +386,13 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
                 // Add part
                 case (false, 0) =>
 
-                  logFine("Storing mime part")
+                  logFine[HTTPConnector]("Storing mime part")
                   this.availableDatas += this.currentPart
 
                 // Merge part
                 case (false, size) =>
 
-                  logFine("Merging with head")
+                  logFine[HTTPConnector]("Merging with head")
                   this.availableDatas.head.append(this.currentPart)
               }
 
@@ -407,7 +407,7 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
           //-- Chunked
           case "chunked" =>
 
-            do {
+            while ({ {
 
               //-- If Chunk size is 0 -> try to determine a size from first line
               chunkSize = chunkSize match {
@@ -427,7 +427,7 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
                 // END
                 case 0 =>
 
-                  logFine(s"[Chunked] End of chunked transfer")
+                  logFine[HTTPConnector](s"[Chunked] End of chunked transfer")
                   storePart(this.currentPart)
                   stop = true
 
@@ -445,7 +445,7 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
                     case available if (available >= chunkSize) =>
 
                       // Get byte, then drop from array + 2 bytes for the last CRLF
-                      logFine(s"[Chunked] Reading Chunk of $chunkSize")
+                      logFine[HTTPConnector](s"[Chunked] Reading Chunk of $chunkSize")
                       this.currentPart += bytes.take(chunkSize)
                       bytes = bytes.drop(chunkSize + 2)
 
@@ -455,7 +455,7 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
                     case available =>
 
                       // Get as much as possible until next call
-                      logFine(s"[Chunked] Not enough bytes available (${bytes.size} to complete chunk of $chunkSize")
+                      logFine[HTTPConnector](s"[Chunked] Not enough bytes available (${bytes.size} to complete chunk of $chunkSize")
 
                       this.currentPart += bytes.take(available)
                       bytes = bytes.drop(chunkSize + 2)
@@ -469,15 +469,15 @@ class HTTPProtocolHandler(var localContext: NetworkContext) extends ProtocolHand
                   }
               }
 
-            } while (!stop)
+            } ; !stop}) ()
 
           case mode => throw new RuntimeException(s"HTTP Receive protocol unsupported read mode: $mode")
 
         }
 
-    } while (!stop)
+    } ; !stop}) ()
 
-    logFine("Done")
+    logFine[HTTPConnector]("Done")
     true
 
   }

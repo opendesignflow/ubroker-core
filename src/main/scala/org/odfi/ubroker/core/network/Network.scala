@@ -89,7 +89,7 @@ class Network(var engine: WSBEngine) extends Lifecycle with TLogSource {
 
             case Some(connector) =>
 
-              logFine(s"------ Creating CLIENT connector")
+              logFine[Network](s"------ Creating CLIENT connector")
 
               // Register and Start
               //-------------------

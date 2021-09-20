@@ -49,7 +49,7 @@ class WSAIntermediary extends SOAPIntermediary {
     
     soapMessage => 
    
-      logFine("[WSA] incoming: "+soapMessage.toXMLString)
+      logFine[WSAIntermediary]("[WSA] incoming: "+soapMessage.toXMLString)
       
       //-- Look for Action in header
       //---------
@@ -58,17 +58,17 @@ class WSAIntermediary extends SOAPIntermediary {
           	
           soapMessage.qualifier = action.toString()
         
-          logFine("WSA action: "+action.toString())
+          logFine[WSAIntermediary]("WSA action: "+action.toString())
         
         case h => 
           
-          logFine("WSA header: "+h)
+          logFine[WSAIntermediary]("WSA header: "+h)
       }
       
   }
   
   this.onUpMessage {
-    soap : SOAPMessage =>  
+    (soap : SOAPMessage) =>  
       
       // Add/Update Action in Header from qualifier
       //---------------------------------
@@ -94,7 +94,7 @@ class WSAIntermediary extends SOAPIntermediary {
         case _ =>
       }
       
-      logFine("[WSA] post wsa: "+soap.toXMLString)
+      logFine[WSAIntermediary]("[WSA] post wsa: "+soap.toXMLString)
       
   }
  
@@ -104,11 +104,6 @@ class WSAIntermediary extends SOAPIntermediary {
 
 @xelement(name="Action",ns="http://schemas.xmlsoap.org/ws/2004/08/addressing")
 class Action extends XSDStringBuffer {
-  
- /* override def streamIn(du: DataUnit) = {
-    println("Got DataUnit in Action")
-  }*/
-  
-  
+
   
 }

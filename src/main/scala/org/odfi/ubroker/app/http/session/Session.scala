@@ -48,14 +48,14 @@ class Session(var id: String, var host: String) extends TLogSource {
    */
   def apply(value: (String, Any)) = {
 
-    logFine(s"[Session] Storing value to id $id and instance ${hashCode}")
+    logFine[Session](s"[Session] Storing value to id $id and instance ${hashCode}")
     values = values + value
 
   }
 
   def apply[T <: Any](name: String): Option[T] = {
 
-    logFine(s"[Session] Searching value from id $id and instance ${hashCode}")
+    logFine[Session](s"[Session] Searching value from id $id and instance ${hashCode}")
     this.values.get(name).asInstanceOf[Option[T]]
   }
 
@@ -144,11 +144,11 @@ object Session extends TLogSource {
     message.cookies.get("SSID") match {
       case Some(ssid) =>
 
-        logFine(s"[Session] Looking for existing session id $ssid")
+        logFine[Session](s"[Session] Looking for existing session id $ssid")
         sessions.get(ssid) match {
           case Some(session) =>
 
-            logFine(s"[Session] ... Found")
+            logFine[Session](s"[Session] ... Found")
 
             return session
           case None =>
@@ -175,7 +175,7 @@ object Session extends TLogSource {
 
     sessions = sessions + (newSession.id -> newSession)
 
-    logFine(s"[Session] Saving new session id ${newSession.id} for host $host and instance ${newSession.hashCode}")
+    logFine[Session](s"[Session] Saving new session id ${newSession.id} for host $host and instance ${newSession.hashCode}")
 
     newSession
   }

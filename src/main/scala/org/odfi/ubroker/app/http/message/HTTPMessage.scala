@@ -194,13 +194,13 @@ class HTTPRequest(
 
           var (cookieName, cookieValue) = (matched.group(1) -> matched.group(2))
 
-          logFine(s"Got cookie $cookieName -> $cookieValue")
+          logFine[HTTPMessage](s"Got cookie $cookieName -> $cookieValue")
 
           cookies = cookies + (cookieName -> cookieValue)
 
         case None =>
 
-          logFine(s"Cookie but value regexp did not match")
+          logFine[HTTPMessage](s"Cookie but value regexp did not match")
       })
 
     } else {
@@ -530,10 +530,10 @@ object HTTPRequest extends MessageFactory with TLogSource {
       //-- Got First Message
       case Some(matched) =>
 
-        logFine(s"[HTTP] -> First Message from part ${part.hashCode} with protocol line: " + part.protocolLines(0))
+        logFine[HTTPMessage](s"[HTTP] -> First Message from part ${part.hashCode} with protocol line: " + part.protocolLines(0))
         lastFirstMessage = new HTTPRequest(matched.group(1), matched.group(2), matched.group(3))
 
-        logFine("Got HTTP Message for path: " + lastFirstMessage.path + " and operation " + lastFirstMessage.operation)
+        logFine[HTTPMessage]("Got HTTP Message for path: " + lastFirstMessage.path + " and operation " + lastFirstMessage.operation)
 
         lastFirstMessage.operation match {
           case "POST" =>
@@ -716,7 +716,7 @@ object HTTPRequest extends MessageFactory with TLogSource {
       //-- Maybe a Continued Content in case of a multipart message
       case None if (lastFirstMessage != null && lastFirstMessage.isMultipart) =>
 
-        logFine(s"[HTTP] -> Multipart element, create a request with the same path as previous message")
+        logFine[HTTPMessage](s"[HTTP] -> Multipart element, create a request with the same path as previous message")
         var message = new HTTPRequest(lastFirstMessage.operation, lastFirstMessage.path, lastFirstMessage.version)
         message.cookies = lastFirstMessage.cookies
         message += part.bytes
@@ -729,7 +729,7 @@ object HTTPRequest extends MessageFactory with TLogSource {
 
       //-- No Idea
       case _ =>
-        logWarn(s"[HTTP] -> Not a first message and not a multipart part")
+        logWarn[HTTPMessage](s"[HTTP] -> Not a first message and not a multipart part")
 
     }
 
@@ -758,13 +758,13 @@ class HTTPResponse extends HTTPMessage with MimePart with TLogSource {
 
           var (cookieName, cookieValue) = (matched.group(1) -> matched.group(2))
 
-          logFine(s"Got cookie $cookieName -> $cookieValue")
+          logFine[HTTPMessage](s"Got cookie $cookieName -> $cookieValue")
 
           cookies = cookies + (cookieName -> cookieValue)
 
         case None =>
 
-          logFine(s"Cookie but value regexp did not match")
+          logFine[HTTPMessage](s"Cookie but value regexp did not match")
       })
 
     } else {
@@ -824,7 +824,7 @@ $sessionId
       case _ => headerLines.mkString("", "\r\n", "\r\n\r\n")
     }
 
-    logFine(s"Response Headers: $header //")
+    logFine[HTTPMessage](s"Response Headers: $header //")
 
     // Create Bytes
     //-------------------
@@ -946,7 +946,7 @@ object HTTPResponse extends MessageFactory with TLogSource {
 
       //-- No Idea
       case _ =>
-        logWarn(s"[HTTP] -> Not a first message and not a multipart part")
+        logWarn[HTTPResponse](s"[HTTP] -> Not a first message and not a multipart part")
 
     }
 

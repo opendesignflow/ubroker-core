@@ -57,7 +57,7 @@ trait MessageIntermediary[MT <: Message] extends Intermediary {
   //-----------------------
 
   //-- Only accept messages of provided type
-  this.acceptDown { m : Message =>
+  this.acceptDown { (m : Message) =>
     //println(s"MI accepting? -> "+m.getClass.getSuperclass+"->"+messageType.isAssignableFrom(m.getClass()))
     messageType.isAssignableFrom(m.getClass())
   }

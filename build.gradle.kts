@@ -1,16 +1,14 @@
-
-
-var ooxooVersion by extra("4.0.0")
+var ooxooVersion by extra("4.0.1")
 
 plugins {
     // Scala
     // Apply the java plugin to add support for Java
-    id ("scala")
-    id ("org.odfi.ooxoo") version ("4.0.0")
+    id("scala")
+    id("org.odfi.ooxoo") version ("4.0.1")
 
     // Publish
-    id ("maven-publish")
-    id ("java-library")
+    id("maven-publish")
+    id("java-library")
 
 }
 
@@ -66,7 +64,7 @@ tasks.javadoc {
 
 // Scala compilation options
 tasks.withType<ScalaCompile>().configureEach {
-    scalaCompileOptions.additionalParameters = listOf("-Ytasty-reader")
+    scalaCompileOptions.additionalParameters = listOf("-rewrite", "-source", "3.0-migration")
 }
 
 
@@ -76,11 +74,11 @@ dependencies {
 
     // Deps
     //--------------
-    api( "org.odfi.ooxoo:ooxoo-core:${ooxooVersion}")
+    api("org.odfi.ooxoo:ooxoo-core:${ooxooVersion}")
 
     // Scala
     //--------------------
-    api ("org.scala-lang.modules:scala-xml_$scalaMajorVersion:2.0.1")
+    api("org.scala-lang.modules:scala-xml_$scalaMajorVersion:2.0.1")
 
     // Test
     //--------------

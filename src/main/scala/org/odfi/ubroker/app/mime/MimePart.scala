@@ -97,12 +97,12 @@ trait MimePart extends TLogSource {
 
         var (name, value) = (matched.group(1), matched.group(2))
 
-        logFine(s"Param: $name -> $value")
+        logFine[MimePart](s"Param: $name -> $value")
 
         this.addParameter(name, value)
       case None =>
 
-        logFine(s"Protocol Line: $line")
+        logFine[MimePart](s"Protocol Line: $line")
 
         protocolLines = line :: protocolLines
     }

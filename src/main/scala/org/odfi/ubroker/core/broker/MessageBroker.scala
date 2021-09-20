@@ -57,7 +57,7 @@ class MessageBroker(var engine: WSBEngine) extends Lifecycle with TLogSource {
 
   val messageReceiveClosure = {
 
-    msg: Message =>
+    (msg: Message) =>
 
       msg match {
         case m: UpMessage =>

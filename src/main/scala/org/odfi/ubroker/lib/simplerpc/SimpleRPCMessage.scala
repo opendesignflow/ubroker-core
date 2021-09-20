@@ -48,7 +48,7 @@ class SimpleRPCMessage extends ElementBuffer with STAXSyncTrait with org.odfi.ub
     //------------
     var du = new DataUnit()
     du.element = xelement_base(this)
-    du.setHierarchical(true)
+    du.hierarchical = true
     this.getNextBuffer.streamOut(du)
     
     // Output Fields as Attributes

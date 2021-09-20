@@ -49,7 +49,7 @@ trait SOAPMessagesHandler extends SOAPIntermediary {
       m => 
         //println("Got Down Message: "+m.toXMLString)
         
-        logFine(s"Trying to handle message with qualifier ${m.qualifier} in SOAPMessages")
+        logFine[SOAPMessagesHandler](s"Trying to handle message with qualifier ${m.qualifier} in SOAPMessages")
         
         // Look in handler maps for pairs that are matching this body payload and qualifier
         //------------------
@@ -58,7 +58,7 @@ trait SOAPMessagesHandler extends SOAPIntermediary {
           // Check qualifier
           case ( inputCheck , closure ) if (inputCheck._1 == m.qualifier) => 
             
-            logFine(s"Entry matches:  ${inputCheck._1} ")
+            logFine[SOAPMessagesHandler](s"Entry matches:  ${inputCheck._1} ")
             
             // Now look for payload
              m.body.content.foreach {
@@ -79,7 +79,7 @@ trait SOAPMessagesHandler extends SOAPIntermediary {
             
            case ( inputCheck , closure ) =>
             
-            	logFine(s"Entry does not match:  ${inputCheck._1} ")
+            	logFine[SOAPMessagesHandler](s"Entry does not match:  ${inputCheck._1} ")
             
             
         }
@@ -129,7 +129,7 @@ trait SOAPMessagesHandler extends SOAPIntermediary {
     
     // Add to map
     //----------------------
-    logFine(s"Registering SOAP Message handler: ${(qualifier -> c)} ")
+    logFine[SOAPMessagesHandler](s"Registering SOAP Message handler: ${(qualifier -> c)} ")
     messageHandlers = messageHandlers + ( (qualifier -> c)  -> realClosure)
     
   }
