@@ -1,12 +1,12 @@
 
 
-var ooxooVersion by extra("4.0.0-SNAPSHOT")
+var ooxooVersion by extra("4.0.0")
 
 plugins {
     // Scala
     // Apply the java plugin to add support for Java
     id ("scala")
-    id ("org.odfi.ooxoo") version ("4.0.0-SNAPSHOT")
+    id ("org.odfi.ooxoo") version ("4.0.0")
 
     // Publish
     id ("maven-publish")
