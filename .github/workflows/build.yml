@@ -24,11 +24,8 @@ jobs:
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-      - name: Generate OOXOO
-        run: chmod +x gradlew && ./gradlew generateOOXOO
-
       - name: Build with Gradle
-        run: chmod +x gradlew && ./gradlew  build
+        run: chmod +x gradlew && ./gradlew ooxooGenerate build
 
       - name: Publish  to ODFI OSS
         run: chmod +x gradlew && ./gradlew publish
