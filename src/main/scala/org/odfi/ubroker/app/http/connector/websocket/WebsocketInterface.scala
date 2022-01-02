@@ -23,8 +23,8 @@ package org.odfi.ubroker.app.http.connector.websocket
 import java.nio.ByteBuffer
 import java.util.concurrent.Semaphore
 
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
-import com.idyria.osi.ooxoo.lib.json.JsonIO
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.lib.json.JsonIO
 import org.odfi.tea.logging.TLogSource
 import org.odfi.ubroker.core.message.soap.Envelope
 import org.odfi.ubroker.core.message.soap.EnvelopeBody

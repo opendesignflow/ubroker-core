@@ -21,7 +21,7 @@
 package org.odfi.ubroker.core.message.soap
 
 import org.odfi.ubroker.core.broker.tree.MessageIntermediary
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
 import org.odfi.ubroker.core.network.NetworkContext
 import scala.reflect._
 

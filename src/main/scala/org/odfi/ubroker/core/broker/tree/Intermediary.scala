@@ -22,11 +22,11 @@ package org.odfi.ubroker.core.broker.tree
 
 import org.odfi.ubroker.core.message.Message
 import scala.util.matching.Regex
-import com.idyria.osi.ooxoo.core.buffers.structural.XList
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
-import com.idyria.osi.ooxoo.core.buffers.structural.xattribute
-import com.idyria.osi.ooxoo.core.buffers.structural.xelement
-import com.idyria.osi.ooxoo.core.buffers.datatypes._
+import org.odfi.ooxoo.core.buffers.structural.XList
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.core.buffers.structural.xattribute
+import org.odfi.ooxoo.core.buffers.structural.xelement
+import org.odfi.ooxoo.core.buffers.datatypes._
 import java.util.regex.Pattern
 import org.odfi.tea.logging.TLogSource
 import org.odfi.tea.listeners.ListeningSupport

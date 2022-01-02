@@ -22,7 +22,7 @@ package org.odfi.ubroker.lib.soap
 
 
 import org.odfi.ubroker.core.broker.tree.Intermediary
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
 import org.odfi.ubroker.core.message.soap.SOAPMessage
 import org.odfi.ubroker.core.message.UpMessage
 import org.odfi.ubroker.core.message.Message

@@ -22,8 +22,8 @@ package org.odfi.ubroker.core.message
 
 
 import java.nio._
-import com.idyria.osi.ooxoo.core.buffers.structural.io.sax.STAXSyncTrait
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.core.buffers.structural.io.sax.STAXSyncTrait
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
 
 /**
     This class and subtypes are just classes that hold some data without any specific protocol informations

@@ -22,8 +22,8 @@
 package org.odfi.ubroker.core.message
 
 import java.nio.ByteBuffer
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
-import com.idyria.osi.ooxoo.core.buffers.structural.xelement_base
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.core.buffers.structural.xelement_base
 import org.odfi.ubroker.core.message.soap.SOAPMessage
 import org.odfi.ubroker.core.network.NetworkContext
 import org.odfi.ubroker.core.message.soap.JSONSOAPMessage

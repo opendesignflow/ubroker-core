@@ -1,15 +1,15 @@
 package org.odfi.ubroker.app.http.connector.websocket
 
-import com.idyria.osi.ooxoo.core.buffers.structural.xattribute
-import com.idyria.osi.ooxoo.core.buffers.datatypes.LongBuffer
-import com.idyria.osi.ooxoo.core.buffers.datatypes.XSDStringBuffer
-import com.idyria.osi.ooxoo.core.buffers.structural.xelement
-import com.idyria.osi.ooxoo.core.buffers.datatypes.IntegerBuffer
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.core.buffers.structural.xattribute
+import org.odfi.ooxoo.core.buffers.datatypes.LongBuffer
+import org.odfi.ooxoo.core.buffers.datatypes.XSDStringBuffer
+import org.odfi.ooxoo.core.buffers.structural.xelement
+import org.odfi.ooxoo.core.buffers.datatypes.IntegerBuffer
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
 import org.odfi.tea.listeners.ListeningSupport
-import com.idyria.osi.ooxoo.core.buffers.structural.XList
+import org.odfi.ooxoo.core.buffers.structural.XList
 import java.net.URL
-import com.idyria.osi.ooxoo.core.buffers.structural.io.sax.StAXIOBuffer
+import org.odfi.ooxoo.core.buffers.structural.io.sax.StAXIOBuffer
 import java.io.InputStreamReader
 import java.io.File
 import java.io.StringReader

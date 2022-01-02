@@ -20,8 +20,8 @@
  */
 package org.odfi.ubroker.lib.simplerpc
 
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
-import com.idyria.osi.ooxoo.core.buffers.structural.AnyXList
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.core.buffers.structural.AnyXList
 import scala.reflect.ClassTag
 import org.odfi.ubroker.core.broker.tree.MessageIntermediary
 

@@ -21,18 +21,18 @@
 
 package org.odfi.ubroker.core.message.soap
 
-import com.idyria.osi.ooxoo.core.buffers.structural._
-import com.idyria.osi.ooxoo.core.buffers.structural.io.sax._
-import com.idyria.osi.ooxoo.core.buffers.structural.io.sax._
+import org.odfi.ooxoo.core.buffers.structural._
+import org.odfi.ooxoo.core.buffers.structural.io.sax._
+import org.odfi.ooxoo.core.buffers.structural.io.sax._
 import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
 import org.odfi.ubroker.core.message.MessageFactory
 import java.io.ByteArrayInputStream
-import com.idyria.osi.ooxoo.lib.json.JsonIO
+import org.odfi.ooxoo.lib.json.JsonIO
 import java.io.CharArrayReader
 import java.nio.CharBuffer
 import java.io.StringReader
-import com.idyria.osi.ooxoo.lib.json.JsonIO
+import org.odfi.ooxoo.lib.json.JsonIO
 import java.io.PrintStream
 import java.io.CharArrayWriter
 

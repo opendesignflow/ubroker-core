@@ -1,17 +1,17 @@
 package org.odfi.ubroker.lib.simplerpc
 
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
-import com.idyria.osi.ooxoo.core.buffers.structural.io.sax.STAXSyncTrait
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.core.buffers.structural.io.sax.STAXSyncTrait
 import java.nio.ByteBuffer
-import com.idyria.osi.ooxoo.core.buffers.structural.xelement
-import com.idyria.osi.ooxoo.core.buffers.structural.DataUnit
-import com.idyria.osi.ooxoo.core.buffers.structural.xelement_base
+import org.odfi.ooxoo.core.buffers.structural.xelement
+import org.odfi.ooxoo.core.buffers.structural.DataUnit
+import org.odfi.ooxoo.core.buffers.structural.xelement_base
 import org.odfi.tea.reflect.ReflectUtilities
-import com.idyria.osi.ooxoo.core.buffers.structural.xattribute_base
+import org.odfi.ooxoo.core.buffers.structural.xattribute_base
 import java.lang.reflect.Modifier
 import org.odfi.ubroker.core.message.Message
 import org.odfi.ubroker.core.message.MessageFactory
-import com.idyria.osi.ooxoo.core.buffers.structural.AnyXList
+import org.odfi.ooxoo.core.buffers.structural.AnyXList
 
 @xelement
 class SimpleRPCMessage extends ElementBuffer with STAXSyncTrait with org.odfi.ubroker.core.message.Message  {
@@ -120,7 +120,7 @@ object SimpleRPCMessage extends MessageFactory {
     
     // Parse XML
     var any = AnyXList()
-    var io = com.idyria.osi.ooxoo.core.buffers.structural.io.sax.StAXIOBuffer(str)
+    var io = org.odfi.ooxoo.core.buffers.structural.io.sax.StAXIOBuffer(str)
     any.appendBuffer(io)
     io.streamIn
     //any.setNextBuffer(buffer)

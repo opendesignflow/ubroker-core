@@ -20,12 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.odfi.ubroker.core.message.soap
 
-import com.idyria.osi.ooxoo.model.out.scala._
-import com.idyria.osi.ooxoo.model.producers
-import com.idyria.osi.ooxoo.model.producer
-import com.idyria.osi.ooxoo.model.ModelBuilder
-import com.idyria.osi.ooxoo.core.buffers.datatypes.CDataBuffer
-import com.idyria.osi.ooxoo.model.Element
+import org.odfi.ooxoo.model.out.scala._
+import org.odfi.ooxoo.model.producers
+import org.odfi.ooxoo.model.producer
+import org.odfi.ooxoo.model.ModelBuilder
+import org.odfi.ooxoo.core.buffers.datatypes.CDataBuffer
+import org.odfi.ooxoo.model.Element
 
 @producers(Array(
   new producer(value = classOf[ScalaProducer])

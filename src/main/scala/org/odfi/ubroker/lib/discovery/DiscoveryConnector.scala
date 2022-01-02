@@ -25,20 +25,20 @@ import org.odfi.ubroker.core.network.NetworkContext
 
 import java.net.DatagramSocket
 import java.net.DatagramPacket
-import com.idyria.osi.ooxoo.core.buffers.structural.xelement
-import com.idyria.osi.ooxoo.core.buffers.structural.ElementBuffer
-import com.idyria.osi.ooxoo.core.buffers.datatypes.XSDStringBuffer
-import com.idyria.osi.ooxoo.core.buffers.structural.AnyXList
+import org.odfi.ooxoo.core.buffers.structural.xelement
+import org.odfi.ooxoo.core.buffers.structural.ElementBuffer
+import org.odfi.ooxoo.core.buffers.datatypes.XSDStringBuffer
+import org.odfi.ooxoo.core.buffers.structural.AnyXList
 import org.odfi.ubroker.core.message.soap.SOAPMessage
-import com.idyria.osi.ooxoo.core.buffers.structural.xattribute
+import org.odfi.ooxoo.core.buffers.structural.xattribute
 import org.odfi.ubroker.core.message.Message
 
 import java.nio.ByteBuffer
-import com.idyria.osi.ooxoo.core.buffers.datatypes.IntegerBuffer
-import com.idyria.osi.ooxoo.core.buffers.datatypes.XSDStringBuffer.convertStringToXSDStringBuffer
-import com.idyria.osi.ooxoo.core.buffers.datatypes.LongBuffer
+import org.odfi.ooxoo.core.buffers.datatypes.IntegerBuffer
+import org.odfi.ooxoo.core.buffers.datatypes.XSDStringBuffer.convertStringToXSDStringBuffer
+import org.odfi.ooxoo.core.buffers.datatypes.LongBuffer
 import org.odfi.ubroker.core.network.connectors.AbstractConnector
-import com.idyria.osi.ooxoo.core.buffers.structural.XList
+import org.odfi.ooxoo.core.buffers.structural.XList
 import org.odfi.tea.logging.TLogSource
 import org.odfi.tea.listeners.ListeningSupport
 

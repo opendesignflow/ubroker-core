@@ -20,8 +20,8 @@
  */
 package org.odfi.ubroker.lib.soap
 
-import com.idyria.osi.ooxoo.model.ModelBuilder
-import com.idyria.osi.ooxoo.model.Element
+import org.odfi.ooxoo.model.ModelBuilder
+import org.odfi.ooxoo.model.Element
 
 
 /**
