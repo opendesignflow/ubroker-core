@@ -1,10 +1,8 @@
-
-
 plugins {
     // Scala
     // Apply the java plugin to add support for Java
     id("scala")
-    id("org.odfi.ooxoo") version ("4.9.0-SNAPSHOT")
+    id("org.odfi.ooxoo") version ("4.9.0")
 
     // Publish
     id("maven-publish")
@@ -14,7 +12,7 @@ plugins {
 
 // Versions
 //-----------------
-var ooxooVersion by extra("4.9.0-SNAPSHOT")
+var ooxooVersion by extra("4.9.0")
 var scalaMajorVersion by extra("2.13")
 var scalaMinorVersion by extra("7")
 val scalaVersion by extra {
@@ -117,8 +115,8 @@ publishing {
         maven {
 
             // change URLs to point to your repos, e.g. http://my.org/repo
-            var releasesRepoUrl = uri("https://www.opendesignflow.org/maven/repository/internal/")
-            var snapshotsRepoUrl = uri("https://www.opendesignflow.org/maven/repository/snapshots")
+            var releasesRepoUrl = uri("https://repo.opendesignflow.org/maven/repository/internal/")
+            var snapshotsRepoUrl = uri("https://repo.opendesignflow.org/maven/repository/snapshots")
 
             url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
 
@@ -132,6 +130,21 @@ publishing {
     }
 }
 
+tasks.create("checkForSnapshots") {
+    doFirst {
+        project.configurations.forEach { c ->
+            c.dependencies.forEach { dep ->
+                val isSnapshot = dep.version?.endsWith("-SNAPSHOT") ?: false
+                if (isSnapshot) {
+                    throw kotlin.RuntimeException("Snapshot Dependency detected: $dep")
+                }
+            }
+        }
+
+
+    }
+}
+
 repositories {
 
     mavenLocal()
@@ -142,11 +155,11 @@ repositories {
     }
     maven {
         name = "ODFI Releases"
-        url = uri("https://www.opendesignflow.org/maven/repository/internal/")
+        url = uri("https://repo.opendesignflow.org/maven/repository/internal/")
     }
     maven {
         name = "ODFI Snapshots"
-        url = uri("https://www.opendesignflow.org/maven/repository/snapshots/")
+        url = uri("https://repo.opendesignflow.org/maven/repository/snapshots/")
     }
     maven {
         url = uri("https://repo.triplequote.com/libs-release/")
