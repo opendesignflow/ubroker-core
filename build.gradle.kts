@@ -2,7 +2,7 @@ plugins {
     // Scala
     // Apply the java plugin to add support for Java
     id("scala")
-    id("org.odfi.ooxoo") version ("4.9.0")
+    id("org.odfi.ooxoo") version ("5.0.0-SNAPSHOT")
 
     // Publish
     id("maven-publish")
@@ -12,15 +12,15 @@ plugins {
 
 // Versions
 //-----------------
-var ooxooVersion by extra("4.9.0")
+var ooxooVersion by extra("5.0.0-SNAPSHOT")
 var scalaMajorVersion by extra("2.13")
-var scalaMinorVersion by extra("7")
+var scalaMinorVersion by extra("8")
 val scalaVersion by extra {
     "$scalaMajorVersion.$scalaMinorVersion"
 }
 
 // Project version
-var lib_version by extra("2.9.0-SNAPSHOT")
+var lib_version by extra("3.0.0-SNAPSHOT")
 var branch by extra { System.getenv("BRANCH_NAME") }
 if (System.getenv().getOrDefault("BRANCH_NAME", "dev").contains("release")) {
     lib_version = lib_version.replace("-SNAPSHOT", "")
