@@ -2,7 +2,7 @@ plugins {
     // Scala
     // Apply the java plugin to add support for Java
     id("scala")
-    id("org.odfi.ooxoo") version ("5.0.0-SNAPSHOT")
+    id("org.odfi.ooxoo") version ("5.0.0")
 
     // Publish
     id("maven-publish")
@@ -12,7 +12,7 @@ plugins {
 
 // Versions
 //-----------------
-var ooxooVersion by extra("5.0.0-SNAPSHOT")
+var ooxooVersion by extra("5.0.0")
 var scalaMajorVersion by extra("2.13")
 var scalaMinorVersion by extra("8")
 val scalaVersion by extra {
