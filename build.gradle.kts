@@ -2,7 +2,7 @@ plugins {
     // Scala
     // Apply the java plugin to add support for Java
     id("scala")
-    id("org.odfi.ooxoo") version ("5.0.2-SNAPSHOT")
+    id("org.odfi.ooxoo") version ("5.0.3")
 
     // Publish
     id("maven-publish")
@@ -12,9 +12,9 @@ plugins {
 
 // Versions
 //-----------------
-var ooxooVersion by extra("5.0.2-SNAPSHOT")
+var ooxooVersion by extra("5.0.3")
 var scalaMajorVersion by extra("3")
-var scalaMinorVersion by extra("1.3")
+var scalaMinorVersion by extra("2.0")
 val scalaVersion by extra {
     "$scalaMajorVersion.$scalaMinorVersion"
 }
@@ -48,6 +48,7 @@ sourceSets {
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(11))
+        vendor.set(JvmVendorSpec.ADOPTOPENJDK)
     }
     withJavadocJar()
     withSourcesJar()
